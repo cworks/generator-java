@@ -171,17 +171,8 @@ module.exports = generators.Base.extend({
 
     writing: {
 
-        appStaticFiles: function() {
-
-            this.log(this.codeHeader);
-            this.log('Template Path: ' + this.templatePath());
-            //this.log('Destination Path: ' + this.destinationPath());
-            //var source = this.templatePath('_README.md');
-            //var destination = this.destinationPath('src/README.md');
-            //this.log('Source: ' + source);
-            //this.log('Destination: ' + destination);
-            //this.copy('_README.md', 'src/README.md');
-            //this.directory('sql', 'src/sql');
+        gizmoFile: function() {
+            this.copy('_gizmo', this._fromRoot('/.gizmo'));
         },
 
         gitFiles: function() {
@@ -190,7 +181,7 @@ module.exports = generators.Base.extend({
         },
 
         javaProject: function() {
-            var packageDir = this.packageName.replace('.', '/');
+            var packageDir = this.packageName.replace(/\./g, '/');
             // src/main/java
             this.fs.copyTpl(
                 this.templatePath('src/main/java/_App.java'),
