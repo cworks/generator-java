@@ -1,9 +1,10 @@
 'use strict';
 
 var generators = require('yeoman-generator'),
-    _ = require('lodash'),
-    chalk = require('chalk'),
-    yosay = require('yosay');
+             _ = require('lodash'),
+         chalk = require('chalk'),
+         yosay = require('yosay'),
+      datetime = require('../src/js/datetime');
 
 module.exports = generators.Base.extend({
 
@@ -276,7 +277,7 @@ module.exports = generators.Base.extend({
             this.templatePath(this.codeHeader),
             this.destinationPath(this._fromRoot('.codeheader')), {
                 projectName: this.projectName,
-                createdTime: this._nowFormatted(),
+                createdTime: datetime.nowFormatted(),
                 packageName: this.packageName,
                 className: this.mainClassName,
                 tagline: 'Baked with love'
@@ -285,15 +286,6 @@ module.exports = generators.Base.extend({
         var content = this.fs.read(this.destinationPath(this._fromRoot('.codeheader')));
         this.fs.delete(this.destinationPath(this._fromRoot('.codeheader')));
         return content;
-    },
-
-    _nowFormatted: function(){
-        var d = new Date();
-        d = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-"
-            + ('0' + d.getDate()).slice(-2) + " " + ('0' + d.getHours()).slice(-2)
-            + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
-        return d;
     }
-
 
 });

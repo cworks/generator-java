@@ -7,15 +7,6 @@
  * @author you
  * ----------------------------------------------------------------------------
  */
-public class <%= className %> {
-
-    public <%= className %>() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "<%= className %>{}";
-    }
-
+public interface <%= className %> {
+    void something();
 }
