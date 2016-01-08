@@ -49,6 +49,11 @@ module.exports = generators.Base.extend({
                     name: 'singleton',
                     value: 'singleton',
                     checked: false
+                },
+                {
+                    name: 'enum',
+                    value: 'enum',
+                    checked: false
                 }
             ]
         });
@@ -79,6 +84,8 @@ module.exports = generators.Base.extend({
             this._newJavaClass('_NewSingletonClass.java');
         } else if(this.classType === 'interface') {
             this._newJavaClass('_NewInterface.java');
+        } else if(this.classType === 'enum') {
+            this._newJavaClass('_NewSimpleEnum.java');
         } else {
             this._newJavaClass('_NewClass.java');
         }
