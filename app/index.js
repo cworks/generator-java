@@ -15,12 +15,6 @@ module.exports = generators.Base.extend({
         });
         this.projectName = _.kebabCase(this.projectName);
 
-        this.option('buildtool', {
-            desc: 'Grade or Maven as the build tool?',
-            type: String,
-            default: 'gradle'
-        });
-
         this.option('codeheader', {
             desc: 'A codeheader template to apply on all source files.',
             type: String,
@@ -117,27 +111,23 @@ module.exports = generators.Base.extend({
             ]
         });
 
-        // if user did not set buildtool option then prompt
-        if(!this.options.buildtool) {
-            prompts.push({
-                type: 'list',
-                name: 'buildTool',
-                message: 'Select a build tool',
-                choices: [
-                    {
-                        name: 'gradle',
-                        value: 'gradle',
-                        checked: true
-                    },
-                    {
-                        name: 'maven',
-                        value: 'maven',
-                        checked: false
-                    }
-                ]
-            })
-        }
-
+        prompts.push({
+            type: 'list',
+            name: 'buildTool',
+            message: 'Select a build tool',
+            choices: [
+                {
+                    name: 'gradle',
+                    value: 'gradle',
+                    checked: true
+                },
+                {
+                    name: 'maven',
+                    value: 'maven',
+                    checked: false
+                }
+            ]
+        });
 
         // *** execute prompts ***
         var done = this.async();
@@ -221,7 +211,11 @@ module.exports = generators.Base.extend({
         },
 
         gradlizeProject: function() {
+            this.log('gradlizeProject is running ' + this.buildtool);
+
             if(this.buildTool === 'gradle') {
+                this.log('this.buildTool is gradle');
+
                 this.fs.copyTpl(
                     this.templatePath('gradle/_build.gradle'),
                     this.destinationPath(this._fromRoot('build.gradle')), {
@@ -261,7 +255,8 @@ module.exports = generators.Base.extend({
     },
 
     install: function() {
-        this.log('install');
+        this.        this.log('conflicts');
+('install');
     },
 
     end: function() {
